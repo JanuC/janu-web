@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    
+  </style>
+</head>
+<body>
+  
+  <h1>welcome to my first web!</h1>
+  <audio autoplay="autoplay" controls id="xxx">
+    <source src="http://m7.music.126.net/20191024094455/528c53283d47a9729a430e690c71904a/ymusic/0152/055a/5308/681ef6f50f20971ac5bddb07161fc6b5.mp3">
+  </audio>
+</body>
+<script src="./node_modules/axios/dist/axios.js"></script>
+<script>
+  // 获取用户歌单: /user/playlist?uid=100893455
+  axios
+   .get('http://localhost:3000/lyric?id=1325484613')
+   .then(res => {
+     console.log(res);
+     
+   })
+
+  //  var audio = document.getElementById('xxx')
+  // //  console.log(audio.currentTime);
+  // setInterval(async () => {
+  //   // await console.log(audio.duration/60,audio.currentTime);
+  // },1000)
+
+  let arr = [1,2,3,4,5,6]
+  let index = arr.indexOf(3)
+  console.log(index);
+  console.log(arr.filter(item => {return item === 3}));
+  
+   
+</script>
+</html>
