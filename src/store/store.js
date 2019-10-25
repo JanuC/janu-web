@@ -10,6 +10,7 @@ const state = {
   playMusicMsg: {}, // 存放当前播放歌曲的信息
   playMusicTime: {currentTime: '00:00', totalTime: '00:00',progressWidth:{width: '0%'}},// 存放当前播放歌曲的时间信息
   showPlayBtn: true,//控制播放按钮的显示与隐藏
+  showPlayMusic: false,// 是否显示播放界面
 }
 
 const mutations = {
@@ -25,9 +26,18 @@ const mutations = {
   getMusicMsg(state,obj) {
     return state.playMusicMsg = obj
   },
+  // 控制播放暂停按钮的显示与隐藏
+  updateMusicBtn(state,boo) {
+    return state.showPlayBtn = boo
+  },
+  // 获取音乐播放信息
   getMusicTime(state,obj) {
     return state.playMusicTime = obj
   },
+  // 控制音乐界面是否出现
+  updatePlayMusic(state,boo) {
+    return state.showPlayMusic = boo
+  }
 }
 
 

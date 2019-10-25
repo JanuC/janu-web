@@ -6,6 +6,7 @@ import router from './router'
 
 // 导入 element-ui
 import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 
 // 导入字体图标

@@ -6,7 +6,7 @@
       <p class="h2">{{strForm.h3Str}}</p>
       <p class="h3">{{strForm.h4Str}}</p>
       <a href="">{{$store.state.count}}</a>
-      <a href=""  @click.prevent="playlist">《Janu的歌单》</a>
+      <a href=""  @click.prevent="playlist" v-show="playlistShow">《Janu的歌单》</a>
     </div>
   </div>
 </template>
@@ -62,11 +62,19 @@ export default {
   methods: {
     
     playlist() {
+      
+      if(this.$store.state.playlist.length != 0) {
+        // 不是第一次进入页面
+        this.$store.commit('updateMusicBtn',true)
+        this.$store.commit('updatePlayMusic',true)
+        return
+      }
+      
+      // 显示播放界面
       // 将播放按钮隐藏,暂停按钮出现
-      this.$store.state.showPlayBtn = ! this.$store.state.showPlayBtn
+      this.$store.commit('updateMusicBtn',false)
       // 先去vuex中获取用户id
       const userid = this.$store.state.userid
-      // console.log(userid);
       // 通过拿到的id,发送请求,获取用户歌单
       axios
         .get(address + `/user/playlist?uid=${userid}`)

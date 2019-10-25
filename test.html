@@ -6,25 +6,44 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <style>
-    
+    @keyframes rotate {
+      0% {
+        transform: rotateZ(0deg)
+      }
+      100% {
+        transform: rotateZ(360deg)
+      }
+    }
+    .div {
+      width: 100px;
+      height: 100px;
+      margin: 200px auto;
+      background-color: pink;
+      animation: rotate ease 2s;
+    }
+    .div:hover {
+      /* transform: rotateZ(180deg); */
+      
+    }
+    /* 声明一个动画 */
   </style>
 </head>
 <body>
-  
+  <div class="div"></div>
   <h1>welcome to my first web!</h1>
   <audio autoplay="autoplay" controls id="xxx">
-    <source src="http://m7.music.126.net/20191024094455/528c53283d47a9729a430e690c71904a/ymusic/0152/055a/5308/681ef6f50f20971ac5bddb07161fc6b5.mp3">
+    <!-- <source src="http://m7.music.126.net/20191024094455/528c53283d47a9729a430e690c71904a/ymusic/0152/055a/5308/681ef6f50f20971ac5bddb07161fc6b5.mp3"> -->
   </audio>
 </body>
 <script src="./node_modules/axios/dist/axios.js"></script>
 <script>
   // 获取用户歌单: /user/playlist?uid=100893455
-  axios
-   .get('http://localhost:3000/lyric?id=1325484613')
-   .then(res => {
-     console.log(res);
+  // axios
+  //  .get('http://localhost:3000/lyric?id=1325484613')
+  //  .then(res => {
+  //    console.log(res);
      
-   })
+  //  })
 
   //  var audio = document.getElementById('xxx')
   // //  console.log(audio.currentTime);

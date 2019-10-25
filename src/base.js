@@ -48,7 +48,8 @@ export default {
       // 传递进来的dom 是页面中的audio DOM 元素
       clearInterval(timeid)
       var timeid = setInterval(() => {
-        // 总时长
+        if(dom.duration) {
+          // 总时长
         let totalMinute = Math.floor(parseInt(dom.duration / 60))
         if(totalMinute < 10) {
           totalMinute = '0' + totalMinute
@@ -73,14 +74,16 @@ export default {
         // 进度条
         let duration = dom.duration
         let current = dom.currentTime
-        let progressWidth = parseInt(current / duration * 100) + '%'
-        
+        let progressWidth = parseInt(current / duration * 100) 
         // 将时间以及进度条信息提交到vuex
-        this.$store.commit('getMusicTime',{currentTime: currentTime,totalTime:newTotal,progressWidth : {width: progressWidth}})
+        this.$store.commit('getMusicTime',{currentTime: currentTime,totalTime:newTotal,progressWidth : progressWidth})
+
         if(totalTime === currentTime) {
           // 清除定时器
           clearInterval(timeid)
         }
+        }
+        
       },1000)
       
     }
