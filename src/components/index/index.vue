@@ -119,7 +119,7 @@ export default {
     font-size: 18px
   }
    .content>.introduce>a {
-     color: red;
+     color: #b82535;
    }
 </style>
 <style scoped>

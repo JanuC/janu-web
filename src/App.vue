@@ -5,6 +5,12 @@
       <!-- 播放歌曲 -->
       <audio :src="this.$store.state.playMusicMsg.url" autoplay @ended="end" ref="audio" @canplay="getTime" @timeupdate="updateLyric"></audio>
       <div class="info">
+        <!-- 歌词显示 -->
+        <div class="lyrics" v-show="showLyric">
+          <ul :style="styles">
+           <li v-for="(item,index) in lyricArr" :key="index">{{item}}</li>
+          </ul>
+        </div>
         <!-- 歌曲信息 -->
         <div class="musicMsg">
           <img :src="this.$store.state.playMusicMsg.imgUrl">
@@ -33,7 +39,7 @@
           <!-- 音量调节 -->
           <i class="fa fa-volume-up" aria-hidden="true"></i>
           <!-- 歌词按钮 -->
-          <i class="lyric" @click="getLyric">词</i>
+          <i class="lyric" :class="{'bgc':showLyric}" @click="showLyricBtn" >词</i>
         </div>
       </div>
     </div>
@@ -53,6 +59,11 @@ export default {
   data() {
     return {
       id: 0,// 网易云用户id
+      timeArr: [],// 时间数组
+      lyricArr: [], // 歌词数组
+      lyricLine: 0, //记录歌词显示的行数
+      styles: 'transition: none ;transform:translateY(-0px)',
+      showLyric: false, // 是否显示歌词
     }
   },
   created() {
@@ -92,6 +103,9 @@ export default {
     // 获取播放时间以及进度条
     getTime() {
       const audio = this.$refs.audio
+      // 先将歌词行数置为 0,否则会有回滚效果
+      this.lyricLine = 0
+      this.getLyric()
       this.musicTime(audio)
     },
     // 点击上一曲
@@ -123,6 +137,7 @@ export default {
     },
     // 获取歌词功能
     getLyric() {
+      
       let id = this.$store.state.playMusicMsg.id
       axios
         .get(address + `/lyric?id=${id}`)
@@ -133,12 +148,8 @@ export default {
     },
     // 封装一个处理歌词的方法
     handleLyric(lyr) {
-      // console.log(lyr);
       let arr = lyr.split(']')
-      // console.log(arr);
-      
       let newArr = []
-
       arr.forEach((item,index) => {
           newArr.push(arr[index].split('[')[0])
           newArr.push(arr[index].split('[')[1])
@@ -151,33 +162,60 @@ export default {
       newArr.forEach((item,index) => {
         index%2 === 0 ? tArr.push(item) : lArr.push(item)
       })
-      // console.log(tArr);
-      // console.log(lArr);
       
       let newTArr = []
       // 将tArr 数组转换为时间形式
       tArr.forEach((item,index)=> {
-        let mins = parseInt(item[0] + item[1]) * 60 
-        let secs = parseInt(item[3] + item[4])
-        // let mills = parseInt(item[6] + item[7] + item[8]) * 1000
-        let time = mins + secs 
-        newTArr.push(time)
+        let mins = parseInt(item[0] + item[1]) * 60 * 1000
+        let secs = parseInt(item[3] + item[4]) * 1000
+        let mills = parseInt(item[6] + item[7] + item[8])
+        
+        let time = mins + secs + mills
+        newTArr.push(time)// 最终 的歌词数组
       })
-      console.log(newTArr);
-      this.updateLyric(newTArr,lArr)
+      // 将两个数组保存
+      this.timeArr = newTArr
+      this.lyricArr = lArr
     },
-    updateLyric(tArr,lArr) {
+    // 同步更新歌词
+    updateLyric() {
       // console.log(1);
       // 获取当前currentTime
       let currentTime = this.$refs.audio.currentTime
-      // console.log(currentTime);
       
       // 处理currentTime
       let currentInt = Math.floor(currentTime)
-      // let currentFloat = Math.floor((currentTime - currentInt) * 1000)
-      // let newCurrentTime = currentInt * 1000 + currentFloat
-      console.log(currentInt);
+      let currentFloat = Math.floor((currentTime - currentInt) * 1000)
       
+      let newCurrentTime = currentInt * 1000  + currentFloat
+      if(this.timeArr != []) {
+        for(let i = 0; i < this.timeArr.length -1; i++) {
+          if(this.timeArr[i] < newCurrentTime && this.timeArr[i+1] > newCurrentTime) {
+            this.lyricLine = i
+          }
+        }
+      }
+      
+      
+    },
+    // 显示歌词功能
+    showLyricBtn() {
+      if(this.showLyric) {
+        this.showLyricBtnStyle = 'backgroud-color: #fff'
+      }else {
+        this.showLyricBtnStyle = 'backgroud-color: #b82525'
+      }
+      this.showLyric = !this.showLyric
+    }
+  },
+  watch: {
+    // 监听歌词变化
+    lyricLine(newVal,oldVal) {
+      if(this.lyricLine === 0) {
+        this.styles = 'transition: none ;transform:translateY(-0px)'
+      }else {
+        this.styles = 'transition: all 1s;transform:translateY(-' + this.lyricLine * 60 +'px)'
+      }
     }
   }
 }
@@ -199,6 +237,32 @@ export default {
     height: 100%;
     margin: 0 auto;
     position: relative;
+  }
+  .info .lyrics {
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    overflow: hidden;
+    left: 0;
+    bottom: 64px;
+    border-radius: 25px;
+  }
+  .info .lyrics ul,
+  .info .lyrics li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .info .lyrics li {
+    width: 100%;
+    height: 60px;
+    color: #b82535;
+    text-align: center;
+    font-size: 20px;
+    line-height: 60px;
+  }
+  .bgc {
+    background-color: #b82535;
   }
   .info .musicMsg {
     width: 60px;
@@ -276,7 +340,6 @@ export default {
     line-height: 20px;
     text-align: center;
     margin-left: 8px;
-    background-color: #ccc;
     color: #fff;
   }
   .bottom .btns .lyric:hover {
