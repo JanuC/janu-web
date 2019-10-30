@@ -277,6 +277,7 @@ export default {
   watch: {
     // 监听歌词变化
     lyricLine(newVal, oldVal) {
+      
       if (this.lyricLine === 0) {
         this.styles = "transition: none ;transform:translateY(-0px)";
       } else {
@@ -312,7 +313,7 @@ export default {
 #app .bottom {
   width: 100%;
   height: 60px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
   position: fixed;
   bottom: 0;
 }

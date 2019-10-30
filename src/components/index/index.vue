@@ -82,7 +82,7 @@ export default {
           // console.log(res);
           if(res.data.code === 200) {
             // 获取成功
-            const playlistId = res.data.playlist[0].id
+            const playlistId = res.data.playlist[1].id
             // 发送请求获取当前歌单的详细信息
             axios
               .get(address + `/playlist/detail?id=${playlistId}`)

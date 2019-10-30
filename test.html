@@ -38,12 +38,12 @@
 <script src="./node_modules/axios/dist/axios.js"></script>
 <script>
   // 获取用户歌单: /user/playlist?uid=100893455
-  // axios
-  //  .get('http://localhost:3000/lyric?id=1325484613')
-  //  .then(res => {
-  //    console.log(res);
+  axios
+   .get('http://localhost:3000/user/playlist?uid=100893455')
+   .then(res => {
+     console.log(res);
      
-  //  })
+   })
 
   //  var audio = document.getElementById('xxx')
   // //  console.log(audio.currentTime);
@@ -51,10 +51,10 @@
   //   // await console.log(audio.duration/60,audio.currentTime);
   // },1000)
 
-  let arr = [1,2,3,4,5,6]
-  let index = arr.indexOf(3)
-  console.log(index);
-  console.log(arr.filter(item => {return item === 3}));
+  // let arr = [1,2,3,4,5,6]
+  // let index = arr.indexOf(3)
+  // console.log(index);
+  // console.log(arr.filter(item => {return item === 3}));
   
    
 </script>
