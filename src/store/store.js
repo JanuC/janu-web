@@ -11,6 +11,7 @@ const state = {
   playMusicTime: {currentTime: '00:00', totalTime: '00:00',progressWidth:{width: '0%'}},// 存放当前播放歌曲的时间信息
   showPlayBtn: true,//控制播放按钮的显示与隐藏
   showPlayMusic: false,// 是否显示播放界面
+  showSecMusic: false,// 显示音乐二级导航菜单
 }
 
 const mutations = {
@@ -37,6 +38,9 @@ const mutations = {
   // 控制音乐界面是否出现
   updatePlayMusic(state,boo) {
     return state.showPlayMusic = boo
+  },
+  getSecMusic(state,boo) {
+    return state.showSecMusic = boo
   }
 }
 

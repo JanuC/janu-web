@@ -58,6 +58,7 @@ export default {
       
       
     },100)
+    this.$store.commit('getSecMusic', false)
   },
   methods: {
     

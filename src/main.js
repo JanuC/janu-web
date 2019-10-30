@@ -20,6 +20,16 @@ import store from './store/store'
 
 // 引入axios
 import axios from 'axios'
+
+// 引入 vue-lazyload
+import vueLazyLoad from 'vue-lazyload'
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload,{
+  preLoad: 1.3,
+  error:'../static/image/error.jpg',
+  loading:'../static/image/loading.gif',
+  attempt: 1
+})
 // 响应状态码拦截
 axios.interceptors.response.use(
   response => {

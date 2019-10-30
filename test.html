@@ -14,12 +14,18 @@
         transform: rotateZ(360deg)
       }
     }
-    .div {
-      width: 100px;
-      height: 100px;
-      margin: 200px auto;
+    html,body {
+      width: 100%;
+      height: 3000px;
+      background-color: red;
+    }
+    div {
+      /* width: 100px; */
+      /* height: 100px; */
+      /* margin: 200px auto; */
       background-color: pink;
-      animation: rotate ease 2s;
+      
+      /* animation: rotate ease 2s; */
     }
     .div:hover {
       /* transform: rotateZ(180deg); */
@@ -29,11 +35,20 @@
   </style>
 </head>
 <body>
-  <div class="div"></div>
+  <!-- <div class="div"></div> -->
   <h1>welcome to my first web!</h1>
   <audio autoplay="autoplay" controls id="xxx">
     <!-- <source src="http://m7.music.126.net/20191024094455/528c53283d47a9729a430e690c71904a/ymusic/0152/055a/5308/681ef6f50f20971ac5bddb07161fc6b5.mp3"> -->
   </audio>
+  <div>
+    <p>dadad</p>
+    <p>dadad</p>
+    <p>dadad</p>
+    <p>dadad</p>
+    <p>dadad</p>
+    <p>dadad</p>
+    <p>dadad</p>
+  </div>
 </body>
 <script src="./node_modules/axios/dist/axios.js"></script>
 <script>
@@ -56,6 +71,9 @@
   // console.log(index);
   // console.log(arr.filter(item => {return item === 3}));
   
-   
+   window.addEventListener('scroll',(e) => {
+      console.log(1);
+       
+   },true)
 </script>
 </html>
