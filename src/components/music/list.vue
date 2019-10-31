@@ -1,5 +1,5 @@
 <template>
-  <div class="listmain" :class="{marbottom: !marginBottom}">
+  <div class="listmain" :class="{marbottom: marginBottom}">
     <div class="loadingImg" v-show="loadingImg">
         <img src="../../../static/image/loading1.gif">
     </div>
@@ -197,7 +197,7 @@ export default {
   },
   watch: {
     isShow(newVal,oldVal) {
-      this.marginBottom = newVal
+      this.marginBottom = oldVal
       
     },
     playlistMsgArr: {

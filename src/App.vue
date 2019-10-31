@@ -489,6 +489,9 @@ export default {
 .voiceSlider .el-slider__bar {
   background: #b82525;
 }
+.voiceSlider .el-slider__button {
+  margin-right: 2px;
+}
 
 </style>
 <style>

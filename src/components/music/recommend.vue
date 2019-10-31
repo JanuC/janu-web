@@ -167,6 +167,7 @@ export default {
       height: 50px;
       border-bottom: 2px solid #b82535; 
       position: relative;
+      // margin: 0 20px;
       span {
         line-height: 50px;
         font-size: 20px;
@@ -189,7 +190,7 @@ export default {
         border-radius: 5px;
         box-shadow: 0.3px 0.5px 0.1px 0.1px #a80909;
         position: absolute;
-        right: 0;
+        right: 1px;
         top: 10px;
       }
       .choice {
@@ -308,6 +309,8 @@ export default {
       // height: 100%;
       margin-top: 10px;
       // background: pink;
+      padding-left: 10px;
+      box-sizing: border-box;
       .loadingImg {
         width: 600px;
         height: 600px;
