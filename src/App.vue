@@ -99,6 +99,7 @@ export default {
       value: 50,// 音量大小
       musicProgress: 0,
       isImgRotate: false,// 图片是否旋转
+      
     };
   },
   created() {
@@ -117,7 +118,7 @@ export default {
           this.id = res.data.account.id;
           // 将当前用户id 存在vuex中
           this.sendUserId(this.id);
-        }
+        } 
       });
   },
   methods: {
@@ -273,7 +274,8 @@ export default {
       const currentTime = pos / 100 * totalTime
       this.musicProgress = parseInt(currentTime / totalTime * 100)
       this.$refs.audio.currentTime = currentTime
-    }
+    },
+    
   },
   watch: {
     // 监听歌词变化
@@ -287,7 +289,7 @@ export default {
           this.lyricLine * 60 +
           "px)";
       }
-    }
+    },
   }
 };
 </script>
@@ -319,26 +321,28 @@ export default {
   bottom: 0;
 }
 .bottom .info {
-  width: 768px;
+  width: 980px;
   height: 100%;
   margin: 0 auto;
   position: relative;
   user-select: none;
 }
 .info .lyrics {
-  width: 100%;
+  width: 600px;
   height: 60px;
   position: absolute;
   overflow: hidden;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   bottom: 64px;
   border-radius: 25px;
 }
 .info .lyrics ul,
 .info .lyrics li {
   list-style: none;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
+  width: 600px;
 }
 .info .lyrics li {
   width: 100%;
@@ -347,6 +351,8 @@ export default {
   text-align: center;
   font-size: 20px;
   line-height: 60px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .bgc {
   background-color: #b82535;
@@ -365,7 +371,7 @@ export default {
   
 }
 .info .author {
-  width: 150px;
+  width: 200px;
   height: 100%;
   position: absolute;
   left: 60px;
@@ -379,14 +385,14 @@ export default {
   font-size: 16px;
 }
 .info .progress {
-  width: 350px;
+  width: 450px;
   height: 100%;
   line-height: 60px;
   position: absolute;
-  right: 45px;
+  right: 90px;
 }
 .progress .el-slider {
-  width: 250px !important;
+  width: 350px !important;
   top: 12px;
   left: 50px;
 }
@@ -415,12 +421,12 @@ export default {
   height: 60px;
   line-height: 60px;
   position: absolute;
-  left: 215px;
+  left: 270px;
   top: 0;
 }
 .bottom .fa-times {
   position: absolute;
-  right: -395px;
+  right: -530px;
   top: 20px;
 }
 .bottom .btns i {

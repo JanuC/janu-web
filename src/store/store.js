@@ -14,7 +14,7 @@ const state = {
   showSecMusic: false,// 显示音乐二级导航菜单
 }
 
-const mutations = {
+const mutations = { 
   // 获取用户id
   getUserId(state,n) {
     return state.userid = n

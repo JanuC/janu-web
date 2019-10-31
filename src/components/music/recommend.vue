@@ -1,17 +1,17 @@
 <template>
-  <div class="musicContent">
+  <div class="musicContent" >
     <div class="category">
-      <span>全部</span>
-      <button class="categoryBtn" @click="createCategory">选择分类</button>
-      <div class="choice" v-show="showCatefory">
+      <span>{{categoryStr}}</span>
+      <button class="categoryBtn" @click="createCategory(showCatefory)">选择分类</button>
+      <div class="choice" v-show="showCatefory" ref="choice">
         <div class="all">
-          <a href="javascript: void(0)">全部风格</a>
+          <a href="javascript: void(0)" @click="updatePlaylist('全部')">全部风格</a>
         </div>
         <div class="box1"></div>
         <dl class="dl" v-for="(item,index) in dtArr" :key="index" height="300px" ref="dl">
             <dt>{{item}}</dt>
             <dd ref="dd">
-              <a href="javascript:void(0)" class="dd-a"  v-for="(items,indexs) in newddArr(index)" :key="indexs" >{{items.name}}</a>
+              <a href="javascript:void(0)" class="dd-a" :class="{categorybgc: items.name === categoryStr}"  v-for="(items,indexs) in newddArr(index)" :key="indexs" @click="updatePlaylist(items.name)" >{{items.name}}</a>
             </dd>
         </dl>
       </div>
@@ -19,8 +19,11 @@
       
     </div>
     <div class="musicMain">
+      <div class="loadingImg" v-show="loadingImg">
+        <img src="../../../static/image/loading1.gif">
+      </div>
       <ul>
-        <li v-for="(item,index) in playlistArr" :key="index">
+        <li v-for="(item,index) in playlistArr" :key="index" @click="playlistMsg(item.id)">
           <img v-lazy='item.coverImgUrl'>
           <p>{{item.name}}</p>
           <span><i class="fa fa-headphones" aria-hidden="true"></i>  {{item.playCount}}</span>
@@ -41,7 +44,14 @@ export default {
       ddArr:[],// 存放dd标签中的数据
       showCatefory: false,// 显示选择分类
       playlistArr: [],//歌单列表
+      categoryStr: '',// 当前显示的 歌单分类
+      loadingImg: true,//控制加载中图片显示与隐藏
+      marginBottom: false,
     }
+  },
+  mounted() {
+    // 给body 注册点击事件,以控制点击choice之外的位置,choice隐藏
+    document.body.addEventListener('click',this.bodyClick,true);
   },
   created() {
     // 发送请求,获取歌单分类
@@ -58,19 +68,11 @@ export default {
           });
         }
       })
-    // 进入页面,发送请求,获取全部歌单
-    axios
-      .get(address + '/top/playlist?limit=100')
-      .then(res => {
-        console.log(res);
-        if(res.data.code === 200) {
-          res.data.playlists.forEach(item => {
-            this.playlistArr.push(item)
-          })
-        }
-      })  
+      // 获取全部歌单
+    this.updatePlaylist('全部')
   },
   computed: {
+    // 计算符合要求的数据并返回给 v-for
     newddArr() {
       return index => {
         const newArr = this.ddArr.filter(item => {
@@ -78,14 +80,78 @@ export default {
         })
         return newArr
       }
-    }
+    },
   },
   methods: {
-    createCategory() {
-      for (let i = 0; i < this.$refs.dl.length; i++) {
+    // 设置dt的高度
+    createCategory(boo) {
+      if(!boo) {
+        for (let i = 0; i < this.$refs.dl.length; i++) {
         this.$refs.dl[i].style.height = this.$refs.dd[i].offsetHeight + 'px'
         }
-      this.showCatefory =!this.showCatefory;
+        this.showCatefory = true
+      }else {
+        this.showCatefory = false
+      }
+    },
+    // 控制choice 的显示与隐藏
+    bodyClick(e) {
+      // 判断点击的对象中是否有 choice
+      if(e.path.some(item=>item.className === "choice")) {
+        // 有,什么都不用做
+        return
+        
+      }else  if(e.path.some(item=>item.className === "categoryBtn")) {
+        // 有,什么都不用做
+        return
+      }
+      else {
+        // 没有,隐藏 choice
+        this.showCatefory = false
+      }
+    },
+    // 该方法用于切换推荐页显示的歌单分类
+    updatePlaylist(str) {
+      // 先让loading 图片显示
+      this.loadingImg = true
+      // 先判断当前歌单分类是否为点击的歌单分类
+      if(str === this.categoryStr) {
+        // 不用发请求
+        // 隐藏 choice
+        this.showCatefory = false
+        return
+      }
+      axios
+        .get(address + '/top/playlist?limit=100&cat=' + str)
+        .then(res => {
+          console.log(res);
+          if(res.data.code === 200) {
+            // 请求成功
+            const newPlaylistArr = []
+            res.data.playlists.forEach(item => {
+            newPlaylistArr.push(item)
+            })
+            this.playlistArr = newPlaylistArr
+          }
+        })
+      // 改变显示的歌单分类
+      this.categoryStr = str
+      // 隐藏 choice
+      this.showCatefory = false
+    },
+    // 跳转到歌单详情组件
+    playlistMsg(id) {
+     this.$router.push({path: '/home/music/list',query: {id: id}})
+      
+    }
+  },
+  watch: {
+    // 监听playlistArr 中数据是否发生改变
+    playlistArr: {
+      deep: true,
+      handler() {
+        this.loadingImg = false
+      }
     },
   }
 }
@@ -127,6 +193,7 @@ export default {
         top: 10px;
       }
       .choice {
+        z-index: 99;
         width: 600px;
         position: absolute;
         left: 10px;
@@ -231,13 +298,22 @@ export default {
           border-top: 1px solid rgba(0, 0, 0,.2);
           border-left: 1px solid rgba(0, 0, 0,.2);
         }
+        .categorybgc {
+          color: #a80909 !important;
+        }
       }
     }
     .musicMain {
       width: 100%;
-      height: 100%;
+      // height: 100%;
       margin-top: 10px;
       // background: pink;
+      .loadingImg {
+        width: 600px;
+        height: 600px;
+        display: block;
+        margin: 0 auto;
+      }
       ul,li {
         list-style: none;
         margin: 0;

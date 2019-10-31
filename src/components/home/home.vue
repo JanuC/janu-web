@@ -10,7 +10,7 @@
             <router-link to="/home/index" >首页</router-link>
             <router-link to="/home/blog" >博客</router-link>
             <router-link to="/home/music" class="music" >音乐
-              <div class="secondNav" v-show="this.$store.state.showSecMusic">
+              <div class="secondNav" v-show="this.$store.state.showSecMusic" v-if="showSecNav">
               <div class="box"></div>
               <div class="link">
                 <router-link to="/home/music/recommend" class="musicSec" exact>推荐</router-link>
@@ -35,7 +35,24 @@
 
 <script>
 export default {
-
+  data() {
+     return {
+       showSecNav: true
+     }
+  },
+  mounted() {
+    window.addEventListener('scroll',this.scrollTop,true)
+  },
+  methods: {
+    scrollTop(e) {
+      // console.log(document.documentElement.scrollTop);
+      if(document.documentElement.scrollTop > 100) {
+        this.showSecNav = false
+      }else {
+        this.showSecNav = true
+      }
+    }
+  }
 };
 </script>
 

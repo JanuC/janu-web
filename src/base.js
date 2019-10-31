@@ -108,6 +108,28 @@ export default {
           }
         })
     }
+
+    // 4. 该方法用于获取歌单信息
+    Vue.prototype.getPlaylist = function(id,clickMusicId) {
+      axios
+        .get(address + '/playlist/detail?id=' + id) 
+        .then(res => {
+          console.log(res);
+          
+          if(res.data.code === 200) {
+            // 将所有信息保存
+            const list = []
+            for(let i = 0 ; i < res.data.privileges.length; i++) {
+              list.push(res.data.privileges[i].id)
+            }
+             // 将歌单所有歌曲id保存在 vuex 中
+             this.$store.commit('getPlaylist',list)
+             // 播放点击的歌曲
+             this.getMusicMsg(clickMusicId)
+          }
+        })
+    }
   }
 }
+
 
