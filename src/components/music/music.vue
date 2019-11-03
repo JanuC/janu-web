@@ -22,8 +22,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  @import '../../assets/css/common.less';
-  @import '../../assets/css/music.less';
+  @import "../../assets/css/common.less";
+  @import "../../assets/css/music.less";
 
 </style>
 

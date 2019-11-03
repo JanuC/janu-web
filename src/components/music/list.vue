@@ -1,7 +1,7 @@
 <template>
   <div class="listmain" :class="{marbottom: marginBottom}">
     <div class="loadingImg" v-show="loadingImg">
-        <img src="../../../static/image/loading1.gif">
+        <img src="/static/image/loading1.gif">
     </div>
     <div class="authorMsg" v-show="!loadingImg">
       <div class="bgImg">
@@ -96,7 +96,7 @@
 
 <script>
 import axios from 'axios'
-const address = "http://localhost:3000";
+const address = "http://v2.janulog.com:80";
 export default {
   data() {
     return {
@@ -211,5 +211,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  @import '../../assets/css/list.less';
+  @import "../../assets/css/list.less";
 </style>

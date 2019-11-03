@@ -14,7 +14,7 @@
 <script>
 import axios from 'axios'
 import {mapMutations,mapActions} from 'vuex'
-const address = 'http://localhost:3000'
+const address = 'http://v2.janulog.com:80'
 export default {
   data() {
     return {
@@ -134,6 +134,6 @@ export default {
    }
 </style>
 <style scoped>
-  @import '../../assets/css/common.less';
-  @import '../../assets/css/index.less';
+  @import "../../assets/css/common.less";
+  @import "../../assets/css/index.less";
 </style>

@@ -1,7 +1,7 @@
 
 import axios from 'axios'
 
-const address = 'http://localhost:3000'
+const address = 'http://v2.janulog.com:80'
 
 // 该js文件用于存放全局方法
 export default {

@@ -6,11 +6,11 @@ import router from './router'
 
 // 导入 element-ui
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import "element-ui/lib/theme-chalk/index.css"
 Vue.use(ElementUI)
 
 // 导入字体图标
-import '../node_modules/font-awesome/css/font-awesome.css'
+import "../node_modules/font-awesome/css/font-awesome.css"
 
 import base from './base'
 Vue.use(base)
@@ -22,12 +22,11 @@ import store from './store/store'
 import axios from 'axios'
 
 // 引入 vue-lazyload
-import vueLazyLoad from 'vue-lazyload'
 import VueLazyload from 'vue-lazyload'
 Vue.use(VueLazyload,{
   preLoad: 1.3,
-  error:'../static/image/error.jpg',
-  loading:'../static/image/loading.gif',
+  error:'/static/image/error.jpg',
+  loading:'/static/image/loading.gif',
   attempt: 1
 })
 // 响应状态码拦截

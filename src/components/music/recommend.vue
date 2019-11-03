@@ -20,7 +20,7 @@
     </div>
     <div class="musicMain">
       <div class="loadingImg" v-show="loadingImg">
-        <img src="../../../static/image/loading1.gif">
+        <img src="/static/image/loading1.gif">
       </div>
       <ul>
         <li v-for="(item,index) in playlistArr" :key="index" @click="playlistMsg(item.id)">
@@ -36,7 +36,7 @@
 
 <script>
 import axios from 'axios'
-const address = "http://localhost:3000";
+const address = "http://v2.janulog.com:80";
 export default {
   data() {
     return {
@@ -65,7 +65,7 @@ export default {
           res.data.sub.forEach(item => {
               this.ddArr.push(item)
             
-          });
+          }); 
         }
       })
       // 获取全部歌单
@@ -167,7 +167,6 @@ export default {
       height: 50px;
       border-bottom: 2px solid #b82535; 
       position: relative;
-      // margin: 0 20px;
       span {
         line-height: 50px;
         font-size: 20px;
@@ -235,7 +234,6 @@ export default {
           dt,dd {
             margin: 0;
             padding: 0;
-            // height: 100%;
           }
           dt {
             float: left;
@@ -259,7 +257,6 @@ export default {
               text-decoration: none;
               font-size: 14px;
               color: #555;
-              // white-space: nowrap;
             }
             .dd-a:hover {
               text-decoration: underline;
@@ -288,7 +285,6 @@ export default {
           clear: both;
         }
         .box1 {
-          // z-index: -100;
           width: 20px;
           height: 20px;
           background-color: #fff;
@@ -306,9 +302,7 @@ export default {
     }
     .musicMain {
       width: 100%;
-      // height: 100%;
       margin-top: 10px;
-      // background: pink;
       padding-left: 10px;
       box-sizing: border-box;
       .loadingImg {
@@ -337,7 +331,6 @@ export default {
             width: 140px;
           }
           p {
-            // width: 100%;
             margin: 0;
             padding: 0;
             font-size: 14px; 

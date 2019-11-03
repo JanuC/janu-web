@@ -85,7 +85,7 @@ import Vue from "vue";
 import ElementUI from "element-ui";
 Vue.use(ElementUI);
 
-const address = "http://localhost:3000";
+const address = "http://v2.janulog.com:80";
 export default {
   name: "App",
   data() {
