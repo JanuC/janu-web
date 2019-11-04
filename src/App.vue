@@ -112,7 +112,7 @@ export default {
       })
       .then(res => {
         if (res.data.code === 200) {
-          console.log(res);
+          // console.log(res);
           // 登录成功
           // 获取当前用户id
           this.id = res.data.account.id;
@@ -141,7 +141,12 @@ export default {
       let index = this.$store.state.playlist.indexOf(id) + 1;
       // 调用封装好的方法,播放下一首歌曲
       // 1 为标记下一曲
-      this.musicCanPlay(this.$store.state.playlist[index], 1);
+      if(this.$store.state.playlist[index]) {
+
+        this.musicCanPlay(this.$store.state.playlist[index], 1);
+      }else {
+        return
+      }
     },
     // 加载完成,获取播放时间以及进度条
     getTime() {

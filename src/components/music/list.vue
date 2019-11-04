@@ -43,7 +43,7 @@
       <div class="pl-top">
        <div class="left">
           <h2>歌曲列表</h2>
-          <a href="javascript: void(0)">播放全部</a>
+          <a href="javascript: void(0)" @click="clickPlay(playlistMsgArr[0].id)">播放全部</a>
        </div>
         <div class="right">
           <span>共{{playlistMsg.trackCount}}首歌曲</span>
@@ -108,10 +108,12 @@ export default {
     }
   },
   created() {
+    // console.log(this.$route.params.id);
+    
     // 传了id过来
-    if(this.$route.query.id) {
-      this.getPlaylistMsg(this.$route.query.id)
-      this.playlistId = this.$route.query.id
+    if(this.$route.params.id) {
+      this.getPlaylistMsg(this.$route.params.id)
+      this.playlistId = this.$route.params.id
     }else {
       // 没传id , 直接请求 自己的歌单
       this.getPlaylistMsg(3045284784)
@@ -186,6 +188,8 @@ export default {
       return m + ':' + s
     },
     clickPlay(clickMusicId) {
+      // console.log(this.playlistMsgArr);
+      
       this.getPlaylist(this.playlistId,clickMusicId)
     }
   },

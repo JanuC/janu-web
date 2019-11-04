@@ -27,7 +27,7 @@ export default new Router({
         children: [
           {path: '/home/music/recommend',component: Recommend},
           {path: '/home/music/rank',component: Rank},
-          {path: '/home/music/list',component: List},
+          {path: '/home/music/list',name:'home/music/list',component: List},
           {path: '/home/music/search',component: Search}
         ],
         

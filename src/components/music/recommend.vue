@@ -124,7 +124,7 @@ export default {
       axios
         .get(address + '/top/playlist?limit=100&cat=' + str)
         .then(res => {
-          console.log(res);
+          // console.log(res);
           if(res.data.code === 200) {
             // 请求成功
             const newPlaylistArr = []
@@ -141,7 +141,8 @@ export default {
     },
     // 跳转到歌单详情组件
     playlistMsg(id) {
-     this.$router.push({path: '/home/music/list',query: {id: id}})
+      // this.$router.push({path: '/home/music/list',query: {id: id}})
+     this.$router.push({name: 'home/music/list',params: {id: id}})
       
     }
   },

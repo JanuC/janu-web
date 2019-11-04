@@ -1,0 +1,110 @@
+.searchMain {
+  width: 100%;
+  min-height: 400px;
+  position: relative;
+  .searchInput {
+    width: 400px;
+    height: 40px;
+    background-color: yellow;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,200px);
+    input {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      outline: none;
+      border: 0;
+      border-bottom: 1px solid #aaa;
+      padding-left: 10px;
+      font-size: 16px;
+    }
+  }
+  .top {
+    animation: topPos 0.1s linear;
+    animation-fill-mode: forwards;
+  }
+  .searchList {
+    width: 100%;
+    padding-top: 60px;
+    table {
+      width: 100%;
+      text-align: left;
+      font-size: 14px;
+      tr {
+        height: 40px;
+      }
+      thead {
+        
+        .t-t1 {
+          width: 40%;
+        }
+        .t-t2 {
+          width: 20%;
+        }
+        .t-t3 {
+          width: 30%;
+        }
+        .t-t4 {
+          width: 10%;
+        }
+      }
+      tbody {
+        tr {
+          height: 40px;
+          td {
+            height: 40px;
+            .td-name {
+              display: inline-block;
+              margin: 0;
+              padding: 0;
+              width: 70%;
+              height: 100%;
+              line-height: 40px;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              overflow: hidden;
+            }
+            a {
+              float: right;
+              margin-right: 30px;
+              height: 40px;
+              line-height: 40px;
+              text-decoration: none;
+              color: #a80909;
+              display: none;
+            }
+          }
+        }
+        tr:hover a{
+          display: block;
+        }
+      }
+      
+      tr {
+        border-bottom: 1px solid red;
+      }
+    }
+    table,tr,th,td {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+.searchInput::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+
+@keyframes topPos {
+  from {
+    top: 0px;
+  }
+  to {
+    top: -200px;
+  }
+}

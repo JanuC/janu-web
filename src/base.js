@@ -18,6 +18,8 @@ export default {
           // console.log(res);
           
           if (res.data.code === 200) {
+            // console.log(res);
+            
             // 得到歌曲id 和 url
             obj.id = res.data.data[0].id
             obj.url = res.data.data[0].url
@@ -90,7 +92,8 @@ export default {
 
     // 3. 该方法用于判断歌曲是否可播放
     Vue.prototype.musicCanPlay = function(id,n) {
-       axios
+      if(id) {
+        axios
         .get(address + `/check/music?id=${id}`)
         .then( async res => {
           if(res) {
@@ -107,6 +110,8 @@ export default {
            }
           }
         })
+      }
+       
     }
 
     // 4. 该方法用于获取歌单信息
@@ -114,7 +119,7 @@ export default {
       axios
         .get(address + '/playlist/detail?id=' + id) 
         .then(res => {
-          console.log(res);
+          // console.log(res);
           
           if(res.data.code === 200) {
             // 将所有信息保存

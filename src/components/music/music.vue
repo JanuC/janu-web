@@ -1,12 +1,10 @@
 <template>
-  <div class="content">
+  <div class="content" :class="{paddingbottom: this.$store.state.showPlayMusic}">
 
     <router-view></router-view>
-      <!-- <div class="searchInput">
-        <input class="input" v-model="searchVal" placeholder="想听听啥？">
-      </div> -->
+      
   </div>
-</template>
+</template> 
 
 <script>
 export default {
