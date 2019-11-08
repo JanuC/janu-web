@@ -2,7 +2,7 @@
   <div class="content" :class="{paddingbottom: this.$store.state.showPlayMusic}">
 
     <router-view></router-view>
-      
+    <el-backtop :right="80" :bottom="80"></el-backtop>
   </div>
 </template> 
 

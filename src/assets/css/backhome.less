@@ -1,0 +1,106 @@
+.backhome {
+  width: 100%;
+  height: 100%;
+  .el-container {
+    width: 100%;
+    height: 100%;
+    .el-header {
+      width: 100%;
+      height: 60px;
+      text-align: center;
+      line-height: 60px;
+      box-shadow: 2px 2px 2px rgba(0,0,0,.1);
+      // position: fixed;
+      z-index: 10;
+      background-color: #404040;
+      color: #fff;
+      h2 {
+        margin: 0;
+        padding: 0;
+      }
+    }
+    .el-header::after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+    .el-aside {
+      width: 200px;
+      height: 100%;
+      box-sizing: border-box;
+      border-right: 1px solid #e9e9e9;
+      overflow: hidden;
+      background-color: #404040;
+      .admin {
+        width: 100%;
+        height: 80px;
+        background-color: #404040;
+        position: relative;
+        .logo {
+          width: 50px;
+          height: 50px;
+          position: absolute;
+          left: 20px;
+          top: 15px;
+          border-radius: 50%;
+          background-image: url(/static/image/admin.png);
+          background-size: contain;
+        }
+        .message {
+          width:100px;
+          height: 100%;
+          color: #fff;
+          position: absolute;
+          left: 100px;
+          top: 20px;
+          .logout {
+            cursor: pointer;
+            color: red;
+          }
+          p {
+            margin: 0;
+            padding: 0;
+          }
+        }
+      }
+      ul,li {
+        margin: 0;
+        padding: 0;
+      }
+      ul {
+        width: 100%;
+      }
+      li {
+        width: 100%;
+        height: 40px;
+        padding-left: 0 !important;
+        background-color: #404040;
+        .link {
+          text-decoration: none;
+          color: #fff;
+          display: block;
+          width: 100%;
+          height: 100%;
+          line-height: 40px;
+          text-align: center;
+          border-left: 4px solid #404040;
+        }
+        .router-link-exact-active {
+          background-color: #666;
+          color: #fff;
+          border-left: 4px solid #ec7259;
+        }
+        .link:hover {
+          background-color: #666;
+          color: #fff;
+          border-left: 4px solid #666;
+        }
+      }
+      
+    }
+    .el-main {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

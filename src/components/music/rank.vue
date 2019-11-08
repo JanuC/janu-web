@@ -8,7 +8,7 @@
          <li><a href="javascript: void(0)" class="title" @click="getRankList(1)" :class="{clickRank: rankListId === 1}">云音乐热歌榜</a></li>
        </ul>
     </div>
-    <div class="listMain">
+    <div class="listMain" v-show="!showLoading">
       <div class="listTitle">
         <div class="titleLeft">
           <h3>歌曲列表</h3>
@@ -40,6 +40,9 @@
         </table>
       </div>
     </div>
+    <div class="loading" v-show="showLoading">
+      <img src="../../../static/image/loading1.gif" alt="">
+    </div>
   </div>
 </template>
 
@@ -55,6 +58,7 @@ export default {
       playlistLength:'',//歌曲数量
       ranklist: [],//歌单列表
       rankId: '',//当前排行榜歌单id
+      showLoading: true 
     }
   },
   created () {
@@ -63,6 +67,7 @@ export default {
   methods: {
     // 该方法用于获取排行榜
     getRankList(idx) {
+      this.showLoading = true
       this.rankListId = idx
       axios 
         .get(address + '/top/list?idx=' + idx)
@@ -79,7 +84,7 @@ export default {
             this.playlistLength = arr.length
             this.rankId = res.data.playlist.id
             // console.log(this.rankId);
-            
+            this.showLoading = false
           }
         })
     },

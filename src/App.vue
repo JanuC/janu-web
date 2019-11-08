@@ -103,7 +103,6 @@ export default {
     };
   },
   created() {
-    
     // 进入页面,先登录网易云音乐
     axios
       .post(address + "/login/cellphone", {
@@ -478,7 +477,7 @@ export default {
 }
 .voice .voiceSlider {
   position: absolute;
-  right: -8px;
+  right: 8px;
   top: 8px;
 }
 .voiceSlider .el-slider__bar,

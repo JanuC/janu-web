@@ -10,7 +10,16 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      // 解决跨域
+      '/musicapi': {
+        target: 'http://v2.janulog.com:80',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/musicapi': ''
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

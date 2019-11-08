@@ -10,10 +10,18 @@ import Recommend from '@/components/music/recommend'
 import Rank from '@/components/music/rank'
 import List from '@/components/music/list'
 import Search from '@/components/music/search'
+import Login from '@/components/back/login'
+import BackHome from '@/components/back/backhome'
+import Article from '@/components/back/article'
+import Write from '@/components/back/write'
 
 Vue.use(Router)
 
-export default new Router({
+import axios from 'axios'
+
+const address = "http://192.168.31.19:3001";
+
+const router = new Router({
   routes: [
     // 重定向
     {path: '/', redirect: '/home'},
@@ -34,6 +42,45 @@ export default new Router({
         },
         {path: '/home/setting',component: Setting},
       ]
-    }
-  ]
+    },
+    {path: '/back',redirect: '/back/login'},
+    {path: '/back/login',component: Login},
+    {path: '/back/backhome',component: BackHome,redirect: '/back/backhome/write',
+    children:[
+      {path: '/back/backhome/article',component: Article},
+      {path: '/back/backhome/write',component: Write},
+    ]},
+  ],
+  
 })
+
+router.beforeEach((to, from, next) => {
+  if(to.path == '/home/*' || to.path == '/back/login' || to.path == '/back') {
+    next()
+  }else {
+    // 判断身份是否合法
+    // 先判断localStorage中是否有 username 和 token
+    let username = localStorage.getItem('username')
+    let token = localStorage.getItem('token')
+    if(!username || !token) {
+      // 用户身份不合法
+      next('/back/login')
+    }else {
+      // 发请求看localStorage 和  服务器端是否匹配
+      axios
+        .post(address + '/api/checkuser',{username: username,token: token})
+        .then(res => {
+          if(res.data.status) {
+            next()
+          }else {
+            next('/back/login')
+          }
+          
+        })
+    }
+
+  }
+  
+})
+
+export default router

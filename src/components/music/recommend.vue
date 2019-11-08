@@ -22,7 +22,7 @@
       <div class="loadingImg" v-show="loadingImg">
         <img src="/static/image/loading1.gif">
       </div>
-      <ul>
+      <ul v-show="!loadingImg">
         <li v-for="(item,index) in playlistArr" :key="index" @click="playlistMsg(item.id)">
           <img v-lazy='item.coverImgUrl'>
           <p>{{item.name}}</p>
