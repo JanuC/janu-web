@@ -1,7 +1,5 @@
 
 import axios from 'axios'
-import { resolve } from 'path'
-import { reject } from 'q'
 
 const address = 'http://v2.janulog.com:80'
 
@@ -149,7 +147,7 @@ export default {
         let username = localStorage.getItem("username");
         let token = localStorage.getItem("token");
         axios
-          .post("http://192.168.31.19:3001" + "/api/checkuser", { username: username, token: token })
+          .post("http://v1.janulog.com:3001" + "/api/checkuser", { username: username, token: token })
           .then((res) => {
             resolve(res.data.status)
           });

@@ -23,7 +23,8 @@
 
 <script>
 import axios from 'axios'
-const address = 'http://192.168.31.19:3001'
+// const address = 'http://47.100.36.233:3006'
+const address = 'http://v1.janulog.com:3001'
 export default {
   data() {
     var validateUsername = (rule,value,callback) => {

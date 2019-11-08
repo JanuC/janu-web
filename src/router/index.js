@@ -19,7 +19,7 @@ Vue.use(Router)
 
 import axios from 'axios'
 
-const address = "http://192.168.31.19:3001";
+const address = 'http://v1.janulog.com:3001';
 
 const router = new Router({
   routes: [
@@ -55,10 +55,8 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if(to.path == '/home/*' || to.path == '/back/login' || to.path == '/back') {
-    next()
-  }else {
-    // 判断身份是否合法
+  if(to.path =='/back/backhome/write' || to.path =='/back/backhome/article' ) {
+     // 判断身份是否合法
     // 先判断localStorage中是否有 username 和 token
     let username = localStorage.getItem('username')
     let token = localStorage.getItem('token')
@@ -78,9 +76,46 @@ router.beforeEach((to, from, next) => {
           
         })
     }
-
+    
+  }else {
+    next()
   }
-  
+  // }else if(to.path == '/home/:name') {
+  //   next()
+  // }else {
+  //   console.log(1);
+    
+  // }
 })
+
+// router.beforeEach((to, from, next) => {
+//   if(to.path == '/back' || to.path =='/back')
+//   if(to.path == '/home/*' || to.path == '/back/login' || to.path == '/back') {
+//     next()
+//   }else {
+//     // 判断身份是否合法
+//     // 先判断localStorage中是否有 username 和 token
+//     let username = localStorage.getItem('username')
+//     let token = localStorage.getItem('token')
+//     if(!username || !token) {
+//       // 用户身份不合法
+//       next('/back/login')
+//     }else {
+//       // 发请求看localStorage 和  服务器端是否匹配
+//       axios
+//         .post(address + '/api/checkuser',{username: username,token: token})
+//         .then(res => {
+//           if(res.data.status) {
+//             next()
+//           }else {
+//             next('/back/login')
+//           }
+          
+//         })
+//     }
+
+//   }
+  
+// })
 
 export default router

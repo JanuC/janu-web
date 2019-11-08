@@ -42,7 +42,8 @@
 
 <script>
 import axios from "axios";
-const address = "http://192.168.31.19:3001";
+// const address = 'http://v1.janulog.com:80'
+const address = 'http://v1.janulog.com:3001'
 export default {
   created() {
     //  this.checkuser()
