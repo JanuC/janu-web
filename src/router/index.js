@@ -14,7 +14,7 @@ import Login from '@/components/back/login'
 import BackHome from '@/components/back/backhome'
 import Article from '@/components/back/article'
 import Write from '@/components/back/write'
-
+import ArticleMain from '@/components/blog/article'
 Vue.use(Router)
 
 import axios from 'axios'
@@ -31,6 +31,7 @@ const router = new Router({
       children: [
         {path: '/home/index',component: Index},
         {path: '/home/blog',component: Blog},
+        {path: '/home/artcile',component: ArticleMain},
         {path: '/home/music',component: Music,
         children: [
           {path: '/home/music/recommend',component: Recommend},

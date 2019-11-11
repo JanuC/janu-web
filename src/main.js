@@ -43,6 +43,10 @@ axios.interceptors.response.use(
   }
 )
 
+// 引入自定义指令
+import Highlight from './highlight'
+Vue.use(Highlight)
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

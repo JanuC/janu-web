@@ -45,8 +45,8 @@ export default {
       if(!value.trim()) {
         callback(new Error('密码不能为空'))
       }
-      else if(value.trim().length > 7 || value.trim().length < 4) {
-        callback(new Error('密码为4到7个字符'))
+      else if(value.trim().length > 12 || value.trim().length < 6) {
+        callback(new Error('密码为6到12个字符'))
       }else {
         callback()
       }

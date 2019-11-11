@@ -17,7 +17,7 @@
           </div>
           <div class="li-right">
             <h3>{{item.title}}</h3>
-            <span :class="{green: item.ispublish === 'true'}">{{item.ispublish === 'true' ? '已发布' : '草稿'}}</span>
+            <span :class="{green: item.ispublish === 'true'}">{{item.ispublish === 'true' ? '已发布' : '草稿'}}{{item.isshow === 'true' ? '(可见)' : '(不可见)'}}</span>
             <div class="setting">
               <i class="fa fa-trash-o" aria-hidden="true" @click="delArticle(index)"></i>
             </div>
@@ -107,6 +107,7 @@ export default {
             arr.push(item);
           });
           this.articleList = arr;
+          
           // 选中第一篇文章
           this.changeArticle(0);
         }
@@ -153,8 +154,6 @@ export default {
     // 该功能用于发布文章或者保存草稿
     // num: 1: 发布文章 2: 保存草稿
     sendArticle(num) {
-      console.log(num);
-      
       if (!this.ruleForm.value) {
         this.$message({
           message: "请选择文章标签",
@@ -170,14 +169,13 @@ export default {
           
           if (num === 2) {
             flag = false;
-            console.log("xxx");
           }
           axios
             .post(address + "/api/newarticle", {
               title: this.title,
               main: this.editor.info,
               category: this.ruleForm.value,
-              isshow: true,
+              isshow: this.ruleForm.isshow,
               ispublish: flag
             })
             .then(res => {
@@ -266,7 +264,8 @@ export default {
     updateArticle() {
       let id = this.selectArticle.id;
       this.checkuser((idx) => {
-        console.log(this.selectArticle);
+        console.log(this.editor.info);
+        
         
         axios
           .post(address + '/api/updatearticle',this.selectArticle)
