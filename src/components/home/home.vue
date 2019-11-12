@@ -5,7 +5,7 @@
       <el-header>
         <div class="nav">
           <div class="logo">
-            <h1>Janu</h1>
+            <img src="/static/image/logo.png" alt="">
           </div>
           <div class="top">
             <router-link to="/home/index" >首页</router-link>

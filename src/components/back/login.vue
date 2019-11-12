@@ -132,7 +132,7 @@ body {
 }
 
 .form input {
-  background-color: #2d3035!important;
+  background-color: rgba(45,48,53,0)!important;
   border: 0;
   border-bottom: 1px solid #F56C6C;
   border-radius: 0%;

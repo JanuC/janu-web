@@ -28,7 +28,7 @@
        >
         <li v-for="(item) in showList" :key="item.id">
           <div class="article" @click="getArticle(item.id)">
-            <h2 :class="{istop: returnBoo(item.istop)}">{{item.title}} {{returnBoo(item.istop) ? '---[置顶]' : ''}}</h2>
+            <h2 ><span :class="{istop: returnBoo(item.istop)}"> {{returnBoo(item.istop) ? '[置顶]' : ''}}</span>{{item.title}}</h2>
             <div class="articlemsg">
               <span>
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

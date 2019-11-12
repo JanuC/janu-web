@@ -22,6 +22,7 @@ import axios from 'axios'
 const address = 'http://v1.janulog.com:3001';
 
 const router = new Router({
+  mode: 'history',
   routes: [
     // 重定向
     {path: '/', redirect: '/home'},

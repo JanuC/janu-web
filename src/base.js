@@ -178,7 +178,7 @@ export default {
           arr.splice(index,1)
         }
       })
-      let newArticleArr = newArr.concat(arr.reverse())
+      let newArticleArr = newArr.concat(arr)
       return newArticleArr
     }
   }

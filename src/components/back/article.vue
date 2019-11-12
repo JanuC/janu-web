@@ -6,6 +6,7 @@
           <div class="a-left">
             <h2>{{item.title}}</h2>
             <span>更新于: {{updateTime(item.updatetime)}}</span>
+            <span>标签: {{retutnLabel(item.category)}}</span>
             <span
               class="error"
               :class="{success: returnBoo(item.ispublish)}"
@@ -42,6 +43,13 @@ export default {
       allList: [],
       showChild: false,// 是否显示子组件
       id: -1,//需要修改文章的id
+      options: [
+        { value: "HTML", label: "HTML" },
+        { value: "JS", label: "JS" },
+        { value: "CSS", label: "CSS" },
+        { value: "log", label: "随笔" },
+        { value: "face", label: "面试" }
+      ]
     };
   },
   created() {
@@ -134,6 +142,15 @@ export default {
       // console.log(id);
       this.id = id
       this.showChild = true //显示子组件
+    },
+    // 该方法用于返回标签
+    retutnLabel(str) {
+      
+      let obj = this.options.find(item => {
+        return item.value === str
+      })
+      return obj.label
+      
     }
   },
   components: {

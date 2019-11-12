@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <router-view />
+    <div class="web">蜀ICP备19034436号</div>
     <div class="bottom" v-show="this.$store.state.showPlayMusic">
       <!-- 播放歌曲 -->
       <audio
@@ -274,12 +275,12 @@ export default {
     // 改变播放位置
     updatePosition(pos) {
       // 获取总时长
+      
       const totalTime = this.$refs.audio.duration
       const currentTime = pos / 100 * totalTime
       this.musicProgress = parseInt(currentTime / totalTime * 100)
       this.$refs.audio.currentTime = currentTime
     },
-    
   },
   watch: {
     // 监听歌词变化
@@ -495,6 +496,14 @@ export default {
 }
 .voiceSlider .el-slider__button {
   margin-right: 2px;
+}
+#app .web {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  color: #ccc;
+  font-size: 12px;
+  padding-right: 40px;
 }
 
 </style>
