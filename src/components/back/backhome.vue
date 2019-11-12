@@ -33,7 +33,7 @@
         <h2>Janu后台管理</h2>
       </el-header>
         <el-main>
-          <router-view></router-view>
+          <router-view v-if="isRouteeAlive"></router-view>
         </el-main>
       </el-container>
     </el-container>
@@ -45,6 +45,16 @@ import axios from "axios";
 // const address = 'http://v1.janulog.com:80'
 const address = 'http://v1.janulog.com:3001'
 export default {
+  provide() {
+    return {
+      reload: this.reload
+    }
+  },
+  data() {
+    return {
+      isRouteeAlive: true
+    }
+  },
   created() {
     //  this.checkuser()
     // console.log(location.hash);
@@ -60,7 +70,7 @@ export default {
         axios
           .post(address + '/api/logout',{name:name})
           .then(res => {
-            console.log(res);
+            // console.log(res);
             if(res.data.code === 200) {
               // 退出成功
               this.$message({
@@ -87,6 +97,12 @@ export default {
             }
           })
       },name)
+    },
+    reload() {
+      this.isRouteeAlive = false
+      this.$nextTick(() => {
+        this.isRouteeAlive = true
+      })
     }
     
   }

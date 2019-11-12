@@ -29,10 +29,10 @@ export default {
       type: Boolean,
       default: false
     },
-    length: {
-      type: Number,
-      default: -1
-    }
+    // length: {
+    //   type: Number,
+    //   default: -1
+    // }
   },
   watch: {
     isClear(boo) {
@@ -46,14 +46,6 @@ export default {
       // 同步文本域
       this.editor.txt.html(val)
     },
-    length(num) {
-      if(num) {
-        this.editor.$textElem.attr('contenteditable', true)
-      }else {
-        this.editor.$textElem.attr('contenteditable', false)
-      }
-      
-    }
   },
   mounted() {
       this.seteditor()
@@ -103,10 +95,11 @@ export default {
     margin: 0 auto;
   }
   .toolbar {
+    /* height: 5%; */
     border: 1px solid #ccc;
   }
   .text {
     border: 1px solid #ccc;
-    height: 100%;
+    height: 95%;
   }
 </style>

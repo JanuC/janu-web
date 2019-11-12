@@ -46,7 +46,7 @@ const router = new Router({
     },
     {path: '/back',redirect: '/back/login'},
     {path: '/back/login',component: Login},
-    {path: '/back/backhome',component: BackHome,redirect: '/back/backhome/write',
+    {path: '/back/backhome',component: BackHome,redirect: '/back/backhome/article',
     children:[
       {path: '/back/backhome/article',component: Article},
       {path: '/back/backhome/write',component: Write},

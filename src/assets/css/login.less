@@ -2,27 +2,75 @@
 .backMain {
     width: 100%;
     height: 100%;
-    background-color: #ccc;
+    background-image: url(/static/image/bg.jpeg);
+    background-size: cover;
     position: relative;
-    .loginMain {
-      width: 500px;
-      height: 400px;
+    .loginMain { 
+      width: 60%;
+      height: 80%;
+      background-color: pink;
       position: absolute;
       left: 50%;
       top: 50%;
       transform: translate(-50%,-50%);
-      .el-form {
-        .el-form-item {
-          margin: 40px 0;
-        }
-        .el-button {
-          width: 200px;
-          height: 40px;
-          background-color: skyblue;
-        }
-        .el-button:hover {
+      .l-left {
+        width: 50%;
+        height: 100%;
+        background-color: rgba(219,101,116,.95);
+        float: left;
+        position: relative;
+        .content {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          padding-left: 30px;
           color: #fff;
+          h2,p {
+            margin: 0;
+            padding: 0;
+          }
+          h2 {
+            font-size: 26px;
+          }
+          p {
+            margin-top: 20px;
+            font-size: 14px;
+          }
         }
       }
+      .l-right {
+        width: 50%;
+        height: 100%;
+        float: right;
+        background-color: #2d3035;
+        position: relative;
+        .logincontent {
+          width: 100%;
+          height: 50%;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          padding-left: 30px;
+          padding-right: 20px;
+          box-sizing: border-box;
+          .el-form {
+            .el-form-item {
+              margin: 40px 0;
+            }
+            .el-button {
+              width: 150px;
+              height: 40px;
+              background-color: #DB6547;
+              color: #fff;
+              border: none;
+            }
+            .el-button:hover {
+              background-color: #d44658;
+            }
+          }
+        }
+        
+      }
+      
     }
   }

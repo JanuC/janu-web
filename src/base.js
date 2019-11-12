@@ -18,7 +18,7 @@ export default {
           // console.log(res);
 
           if (res.data.code === 200) {
-            console.log(res);
+            // console.log(res);
 
             // 得到歌曲id 和 url
             obj.id = res.data.data[0].id
@@ -166,6 +166,20 @@ export default {
         // 非法身份
         this.$router.push({path: '/back/login'})
       }
+    }
+    // 6. 该方法用于处理文章列表,将置顶的文章放在最前面
+    Vue.prototype.progressArticle = function(arr) {
+      let newArr = []
+      arr.forEach((item,index) => {
+        if(item.istop === 'true') {
+          // 将置顶的元素加入数组
+          newArr.push(item)
+          // 将加入的元素移除掉
+          arr.splice(index,1)
+        }
+      })
+      let newArticleArr = newArr.concat(arr.reverse())
+      return newArticleArr
     }
   }
 }

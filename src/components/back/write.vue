@@ -1,6 +1,6 @@
 <template>
   <div class="writeMain">
-    <div class="writeLeft">
+    <!-- <div class="writeLeft">
       <div class="writeNew" @click="createNew">
         <i class="fa fa-plus-circle" aria-hidden="true"></i>
         <span>新建文章</span>
@@ -24,18 +24,18 @@
           </div>
         </li>
       </ul>
-    </div>
-    <div class="writeRight">
+    </div> -->
+    <!-- <div class="writeRight">
       <div class="r-top">
         <input type="text" class="title" v-model="title" @input="updateTitle" />
-      </div>
+      </div>-->
       <!-- <div id="editor" style="height: 100%"></div> -->
-      <template lang="html">
+      <!-- <template lang="html">
         <div class="editorbar">
           <Editorbar v-model="editor.info" :isClear="isClear" @change="change" :length="articleList.length"></Editorbar>
         </div>
-      </template>
-      <div class="r-bottom">
+      </template> -->
+      <!-- <div class="r-bottom">
         <el-form :model="ruleForm" ref="ruleForm">
           <el-form-item label="请选择文章分类:">
             <el-select v-model="ruleForm.value" placeholder="请选择分类" prop="value">
@@ -56,14 +56,16 @@
             <el-button @click="sendArticle(2)" v-show="!published">保存草稿</el-button>
           </el-form-item>
         </el-form>
-      </div>
-    </div>
+      </div> -->
+    <!-- </div>  -->
+    <create-article></create-article>
   </div>
 </template>
 
 <script>
-import Editorbar from "./editor";
-import "wangeditor/release/wangEditor.min.css";
+// import Editorbar from "./editor";
+// import "wangeditor/release/wangEditor.min.css";
+import CreateArticle from './createarticle'
 import axios from "axios";
 // const address = 'http://v1.janulog.com:80'
 const address = 'http://v1.janulog.com:3001'
@@ -100,7 +102,7 @@ export default {
     this.checkuser(() => {
       // 发送请求获取文章列表
       axios.post(address + "/api/getarticle").then(res => {
-        console.log(res);
+        // console.log(res);
         if (res.data.code === 200) {
           let arr = [];
           res.data.articlelist.forEach(item => {
@@ -179,7 +181,7 @@ export default {
               ispublish: flag
             })
             .then(res => {
-              console.log(res);
+              // console.log(res);
               if (res.data.code === 200) {
                 // 发表成功
                 this.$message({
@@ -215,10 +217,10 @@ export default {
           if(idx) {
             // 已经上传到服务器
             this.checkuser((idx) => {
-              console.log(this);
+              // console.log(this);
               
               axios.post(address + "/api/delarticle", { id: idx }).then(res => {
-              console.log(res);
+              // console.log(res);
               if (res.data.code === 200) {
                 // 操作成功
                 this.$message({
@@ -257,14 +259,14 @@ export default {
           }
         })
         .catch(() => {
-          console.log(2);
+          // console.log(2);
         });
     },
     // 该功能用于更新文章
     updateArticle() {
       let id = this.selectArticle.id;
       this.checkuser((idx) => {
-        console.log(this.editor.info);
+        // console.log(this.editor.info);
         
         
         axios
@@ -315,7 +317,7 @@ export default {
     // }
   },
   components: {
-    Editorbar
+    CreateArticle
   }
 };
 </script>
