@@ -22,7 +22,11 @@
           </div>
           <div class="a-right">
             <div class="btn">
-              <i class="fa fa-pencil-square-o update" aria-hidden="true" @click="updateArticle(item.id)"></i>
+              <i
+                class="fa fa-pencil-square-o update"
+                aria-hidden="true"
+                @click="updateArticle(item.id)"
+              ></i>
               <i class="fa fa-trash-o trash" aria-hidden="true" @click="delArticle(index)"></i>
             </div>
           </div>
@@ -35,14 +39,16 @@
 
 <script>
 import axios from "axios";
-import CreateArticle from './createarticle'
+import CreateArticle from "./createarticle";
+// const address = "http://192.168.31.19:3001";
 const address = "http://v1.janulog.com:3001";
 export default {
+  inject: ["reload"],
   data() {
     return {
       allList: [],
-      showChild: false,// 是否显示子组件
-      id: -1,//需要修改文章的id
+      showChild: false, // 是否显示子组件
+      id: -1, //需要修改文章的id
       options: [
         { value: "HTML", label: "HTML" },
         { value: "JS", label: "JS" },
@@ -51,6 +57,31 @@ export default {
         { value: "face", label: "面试" }
       ]
     };
+  },
+  // 组件导航守卫
+  beforeRouteLeave(to, from, next) {
+    let oldVal = this.$store.state.oldArticleVal;
+    let newVal = this.$store.state.newArticleVal;
+    if (oldVal != newVal) {
+      this.$confirm("当前页面有尚未保存的内容,确认离开吗？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          // 将vuex中的文章内容置为空,并放行
+          this.$store.commit("getOldArticleVal", "");
+          this.$store.commit("getNewArticleVal", "");
+          next();
+        })
+        .catch(() => {
+          // 阻止路由跳转,留在当前页面
+          next(false);
+        });
+    } else {
+      // 用户没有修改文章,直接放行
+      next();
+    }
   },
   created() {
     this.checkuser(() => {
@@ -63,7 +94,8 @@ export default {
             arr.push(item);
           });
           // this.allList = arr;
-          this.allList = this.progressArticle(arr)
+          this.allList = this.progressArticle(arr);
+          // console.log(this.allList);
         }
       });
     });
@@ -112,17 +144,7 @@ export default {
                   center: true
                 });
                 // 更新页面数据
-                if (res.data.data.length != 0) {
-                  let arr = [];
-                  res.data.data.forEach(item => {
-                    arr.push(item);
-                  });
-                  this.allList = arr;
-                } else {
-                  this.articleList = [];
-                  this.ruleForm.value = "";
-                  this.editor.info = "";
-                }
+                this.reload();
               } else {
                 // 操作失败
                 this.$message({
@@ -140,17 +162,15 @@ export default {
     },
     updateArticle(id) {
       // console.log(id);
-      this.id = id
-      this.showChild = true //显示子组件
+      this.id = id;
+      this.showChild = true; //显示子组件
     },
     // 该方法用于返回标签
     retutnLabel(str) {
-      
       let obj = this.options.find(item => {
-        return item.value === str
-      })
-      return obj.label
-      
+        return item.value === str;
+      });
+      return obj.label;
     }
   },
   components: {

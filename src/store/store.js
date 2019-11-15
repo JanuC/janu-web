@@ -12,6 +12,8 @@ const state = {
   showPlayBtn: true,//控制播放按钮的显示与隐藏
   showPlayMusic: false,// 是否显示播放界面
   showSecMusic: false,// 显示音乐二级导航菜单
+  oldArticleVal: '',
+  newArticleVal: '',
 }
 
 const mutations = { 
@@ -41,6 +43,12 @@ const mutations = {
   },
   getSecMusic(state,boo) {
     return state.showSecMusic = boo
+  },
+  getOldArticleVal(state,str) {
+    return state.oldArticleVal = str
+  },
+  getNewArticleVal(state,str) {
+    return state.newArticleVal = str
   }
 }
 

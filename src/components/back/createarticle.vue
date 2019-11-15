@@ -43,6 +43,7 @@
 import Editorbar from "./editor";
 import "wangeditor/release/wangEditor.min.css";
 import axios from "axios";
+import {mapMutations} from 'vuex'
 // const address = "http://192.168.31.19:3001";
 const address = "http://v1.janulog.com:3001";
 export default {
@@ -81,11 +82,12 @@ export default {
     returnBoo(str) {
       return str === "true" ? true : false;
     },
+    // 更新文章
     updateArticle() {
       // console.log(this.nowId);
       this.checkuser(() => {
         axios
-          .post(address + "/api/updatearticle", {
+          .post(address + "/api/updatearticle",{
             id: this.nowId,
             title: this.articleTitle,
             main: this.editor.info,
@@ -101,6 +103,9 @@ export default {
                 type: "success",
                 center: true
               });
+              // 更新文章完成后,将vuex中的新老文章置为空
+              this.$store.commit('getOldArticleVal', '')
+              this.$store.commit('getNewArticleVal', '')
               this.reload();
             }
           });
@@ -152,6 +157,9 @@ export default {
                     center: true
                   })
                 }
+                // 发布文章完成后,将vuex中的新老文章置为空
+                this.$store.commit('getOldArticleVal', '')
+                this.$store.commit('getNewArticleVal', '')
                 this.reload()
               }
             });
@@ -177,9 +185,19 @@ export default {
             this.ruleForm.istop = this.returnBoo(res.data.article.istop);
             // 隐藏 loading
             this.showLoading = false;
+            // 将当前文章内容保存在vuex中
+            this.$store.commit('getOldArticleVal', res.data.article.main)
           }
         });
       }, id);
+    },
+    // articleTitle(val) {
+    //     localStorage.setItem('articleTitle',val)
+    // },
+    'editor.info' (val,oldVal) {
+      //将新值提交给vuex
+      this.$store.commit('getNewArticleVal',val)
+      
     }
   },
   components: {

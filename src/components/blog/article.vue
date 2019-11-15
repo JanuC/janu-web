@@ -60,6 +60,8 @@ export default {
       axios
         .post(address + '/api/articlemain',{category:category,id:id})
         .then(res => {
+          // console.log(res);
+          
           if(res.data.code === 200) {
             this.title = res.data.nowArticle.title
             this.html = res.data.nowArticle.main

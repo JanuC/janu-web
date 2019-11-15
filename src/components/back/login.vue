@@ -11,7 +11,7 @@
         <div class="logincontent">
           <el-form :model="ruleForm" ref="ruleForm" :rules="rules" class="form">
             <el-form-item prop="username">
-              <el-input v-model="ruleForm.username" prop="username" placeholder="请输入用户名"></el-input>
+              <el-input v-model="ruleForm.username" prop="username" placeholder="请输入用户名" ref="inputfocus"></el-input>
             </el-form-item>
             <el-form-item  prop="password">
               <el-input
@@ -19,6 +19,7 @@
                 prop="password"
                 placeholder="请输入密码"
                 type="password"
+                @keyup.enter.native="login"
                 
               ></el-input>
             </el-form-item>
@@ -90,6 +91,10 @@ export default {
       this.time = '夜深了'
     }
   },
+  mounted() {
+    // 让input自动获取焦点
+    this.$refs.inputfocus.focus()
+  },
   methods: {
     // 登录功能
     login() {
@@ -116,7 +121,7 @@ export default {
           // console.log(2);
         }
       });
-    }
+    },
   }
 };
 </script>

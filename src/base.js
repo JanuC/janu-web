@@ -170,15 +170,20 @@ export default {
     // 6. 该方法用于处理文章列表,将置顶的文章放在最前面
     Vue.prototype.progressArticle = function(arr) {
       let newArr = []
-      arr.forEach((item,index) => {
+
+      let notop = []
+      arr.forEach(item => {
         if(item.istop === 'true') {
-          // 将置顶的元素加入数组
           newArr.push(item)
-          // 将加入的元素移除掉
-          arr.splice(index,1)
+        }else {
+          notop.push(item)
         }
       })
-      let newArticleArr = newArr.concat(arr)
+    
+      
+      let newArticleArr = newArr.reverse().concat(notop)
+      // console.log(newArticleArr);
+      
       return newArticleArr
     }
   }

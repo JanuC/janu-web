@@ -70,7 +70,7 @@ export default {
       selected: true,// 控制是否可选分类
     };
   },
-  created() {
+  created() { 
     this.$store.commit("getSecMusic", false);
 
     // 进入页面,发送请求获取所有文章所需信息
@@ -102,8 +102,12 @@ export default {
       });
       // console.log(arr);
 
-      this.allList = this.progressArticle(arr);
+      // this.allList = this.progressArticle(arr);
+      // console.log(this.allList);
       
+      this.allList  = arr
+      
+      // console.log(this.allList);
       
       this.selected = false;
       // this.showList = arr

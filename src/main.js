@@ -24,10 +24,10 @@ import axios from 'axios'
 
 // 引入 vue-lazyload
 import VueLazyload from 'vue-lazyload'
-Vue.use(VueLazyload,{
+Vue.use(VueLazyload, {
   preLoad: 1.3,
-  error:'/static/image/error.jpg',
-  loading:'/static/image/loading.gif',
+  error: '/static/image/error.jpg',
+  loading: '/static/image/loading.gif',
   attempt: 1
 })
 // 响应状态码拦截
@@ -36,9 +36,9 @@ axios.interceptors.response.use(
     return response
   },
   error => {
-    if(error.response.status === 404) {
+    if (error.response.status === 404) {
       console.log(error);
-      
+
     }
   }
 )
@@ -48,6 +48,7 @@ import Highlight from './highlight'
 Vue.use(Highlight)
 
 Vue.config.productionTip = false
+
 
 /* eslint-disable no-new */
 new Vue({
