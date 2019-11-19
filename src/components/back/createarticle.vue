@@ -8,7 +8,7 @@
         <input type="text" v-model="articleTitle" />
       </div>
       <div class="eitorContent">
-        <Editorbar v-model="editor.info"></Editorbar>
+        <Editorbar v-model="editor.info" @change="changeVal" :editorVal="editor.info"></Editorbar>
       </div>
       <div class="select">
         <el-form :model="ruleForm" ref="ruleForm">
@@ -116,6 +116,8 @@ export default {
     },
     putOutArticle(num) {
       if (!this.ruleForm.value) {
+        console.log(this.editor.info);
+        
         this.$message({
           message: "请选择文章标签",
           type: "error",
@@ -165,6 +167,12 @@ export default {
             });
         }, num);
       }
+    },
+    changeVal(val) {
+      // console.log(val);
+      this.editor.info = val
+      // console.log(this.editor.info);
+      
     }
   },
   watch: {
@@ -179,6 +187,8 @@ export default {
           // console.log(res);
           if (res.data.code === 200) {
             this.editor.info = res.data.article.main;
+            // console.log(this.editor.info);
+            
             this.articleTitle = res.data.article.title;
             this.ruleForm.value = res.data.article.category;
             this.ruleForm.isshow = this.returnBoo(res.data.article.isshow);
@@ -191,9 +201,6 @@ export default {
         });
       }, id);
     },
-    // articleTitle(val) {
-    //     localStorage.setItem('articleTitle',val)
-    // },
     'editor.info' (val,oldVal) {
       //将新值提交给vuex
       this.$store.commit('getNewArticleVal',val)

@@ -278,8 +278,8 @@ export default {
       
       const totalTime = this.$refs.audio.duration
       const currentTime = pos / 100 * totalTime
-      this.musicProgress = parseInt(currentTime / totalTime * 100)
       this.$refs.audio.currentTime = currentTime
+      this.musicProgress = parseInt(currentTime / totalTime * 100)
     },
   },
   watch: {

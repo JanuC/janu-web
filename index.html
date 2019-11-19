@@ -3,11 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>januweb</title>
+    <title>Janu-我爱前端~</title>
     <link rel="shortcut icon" href="/static/image/janu.ico" />
   </head>
   <body>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script>
+      document.addEventListener('visibilitychange',() => {
+        if(document.visibilityState === 'hidden') {
+          document.title = '你就这样离开了吗~'
+        }else {
+          document.title = '啊！欢迎回来~'
+        }
+      })
+    </script>
   </body>
 </html>
