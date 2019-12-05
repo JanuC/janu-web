@@ -121,16 +121,18 @@ export default {
         this.showCatefory = false
         return
       }
+      // this.playlistArr = []
       axios
         .get(address + '/top/playlist?limit=100&cat=' + str)
         .then(res => {
-          // console.log(res);
+          console.log(res);
           if(res.data.code === 200) {
             // 请求成功
             const newPlaylistArr = []
             res.data.playlists.forEach(item => {
-            newPlaylistArr.push(item)
+              newPlaylistArr.push(item)
             })
+            // this.playlistArr = JSON.parse(JSON.stringify(res.data.playlists))
             this.playlistArr = newPlaylistArr
           }
         })

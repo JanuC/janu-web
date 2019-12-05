@@ -1,6 +1,6 @@
 <template>
 
-  <div class="main">
+  <div class="main" :class="{paddingBottom: $store.state.showPlayMusic}">
     <el-container>
       <el-header>
         <div class="nav">
@@ -52,7 +52,7 @@ export default {
       }else {
         this.showSecNav = true
       }
-    }
+    } 
   }
 };
 </script>

@@ -104,6 +104,14 @@ export default {
     };
   },
   created() {
+    // 监听用户是否离开当前标签页
+    document.addEventListener('visibilitychange',() => {
+        if(document.visibilityState === 'hidden') {
+          document.title = '你就这样离开了吗~'
+        }else {
+          document.title = '啊！欢迎回来~'
+        }
+      })
     // 进入页面,先登录网易云音乐
     axios
       .post(address + "/login/cellphone", {
@@ -280,7 +288,7 @@ export default {
       const currentTime = pos / 100 * totalTime
       this.$refs.audio.currentTime = currentTime
       this.musicProgress = parseInt(currentTime / totalTime * 100)
-    },
+    }
   },
   watch: {
     // 监听歌词变化

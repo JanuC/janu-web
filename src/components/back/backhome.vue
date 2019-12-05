@@ -38,6 +38,7 @@
 
 <script>
 import axios from "axios";
+import {sendSock} from "../../websocket"
 // const address = 'http://v1.janulog.com:80'
 const address = "http://v1.janulog.com:3001";
 export default {
@@ -54,6 +55,7 @@ export default {
   created() {
     //  this.checkuser()
     // console.log(location.hash);
+    sendSock("xxx")
   },
   methods: {
     // 退出功能
